@@ -32,8 +32,8 @@ import {HeroService} from './hero.service';
       }
       .selected { background-color: #EEE; color: #369; }
     `],
-    directives: [HeroDetailComponent],
-    providers: [HeroService]
+    directives: [HeroDetailComponent], //组件指令列表
+    providers: [HeroService] //service列表
 })
 
 export class AppComponent implements OnInit {
