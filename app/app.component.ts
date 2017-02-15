@@ -1,6 +1,7 @@
 import {Component} from 'angular2/core';
 import {Hero} from './hero';
 import {HeroDetailComponent} from './hero-detail.component';
+import {HeroService} from './hero.service';
 
 @Component({
     selector: 'my-app',
@@ -31,25 +32,20 @@ import {HeroDetailComponent} from './hero-detail.component';
       }
       .selected { background-color: #EEE; color: #369; }
     `],
-    directives: [HeroDetailComponent]
+    directives: [HeroDetailComponent],
+    providers: [HeroService]
 })
-export class AppComponent {
-    public title = '英雄之旅'; 
-    public heroes = HEROES;
-    public selectedHero: Hero;
-    onSelect(hero: Hero) { this.selectedHero = hero; }
+
+export class AppComponent implements OnInit {
+  public title = '英雄之旅';
+  public heroes: Hero[];
+  public selectedHero: Hero;
+  constructor(private _heroService: HeroService) { } //定义私有变量
+  getHeroes() {
+    this._heroService.getHeroes().then(heroes => this.heroes = heroes);
+  }
+  ngOnInit() {//组件生命周期的钩子函数，初始化自动调用
+    this.getHeroes();
+  }
+  onSelect(hero: Hero) { this.selectedHero = hero; }
 }
-
-
-var HEROES: Hero[] = [
-  { "id": 11, "name": "苹果手机" },
-  { "id": 12, "name": "亚马逊" },
-  { "id": 13, "name": "谷歌" },
-  { "id": 14, "name": "Facebook" },
-  { "id": 15, "name": "雅虎" },
-  { "id": 16, "name": "阿里巴巴" },
-  { "id": 17, "name": "淘宝网" },
-  { "id": 18, "name": "京东" },
-  { "id": 19, "name": "小米" },
-  { "id": 20, "name": "腾讯" }
-];
