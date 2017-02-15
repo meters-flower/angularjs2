@@ -1,28 +1,12 @@
 import {Component} from 'angular2/core';
-
-interface Hero {
-  id: number;
-  name: string;
-}
+import {Hero} from './hero';
+import {HeroDetailComponent} from './hero-detail.component';
 
 @Component({
     selector: 'my-app',
     template: `
         <h1>{{title}}</h1>
-
-        <div *ngIf="selectedHero">
-            <h2>{{selectedHero.name}} </h2>
-            <div>
-                <label>id: </label>
-                {{selectedHero.id}}
-            </div>
-            <div>
-                <label>name: </label>
-                <div>
-                    <input [(ngModel)]="selectedHero.name"  placeholder="name">
-                </div>
-            </div>
-        </div>
+        <my-hero-detail [hero]="selectedHero"></my-hero-detail>
 
         <h2>英雄列表</h2>
         <ul class="heroes">
@@ -46,14 +30,11 @@ interface Hero {
         top: -1px;
       }
       .selected { background-color: #EEE; color: #369; }
-    `]
+    `],
+    directives: [HeroDetailComponent]
 })
 export class AppComponent {
-    public title = '英雄之旅';
-    public hero: Hero = {
-        id: 1,
-        name: '乔布斯'
-    };  
+    public title = '英雄之旅'; 
     public heroes = HEROES;
     public selectedHero: Hero;
     onSelect(hero: Hero) { this.selectedHero = hero; }
