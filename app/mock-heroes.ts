@@ -11,5 +11,6 @@ export var HEROES: Hero[] = [
   { "id": 17, "name": "淘宝网" },
   { "id": 18, "name": "京东" },
   { "id": 19, "name": "小米" },
-  { "id": 20, "name": "腾讯" }
+  { "id": 20, "name": "腾讯" },
+  { "id": 21, "name": "asd" }
 ];
